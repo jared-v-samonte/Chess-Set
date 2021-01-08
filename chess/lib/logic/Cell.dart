@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'Piece.dart';
 
 
-Color cellColor(bool isFilled)
-{
-  Color shadeOfSqure;
-  if(isFilled)
-      {
-        shadeOfSqure =  const Color(0xDD000000);//.fromRGBO(255, 255, 255, 0.5)
-      }
-      else
-      {
-        shadeOfSqure = const Color(0xFFFFFFFF);//(0, 0, 0, 1.0)
-      }
-  return shadeOfSqure;
-}
+
 
 class Cell extends BoxDecoration 
 {
@@ -24,7 +13,29 @@ class Cell extends BoxDecoration
   final bool isFilled;
   final Piece piece;
 
-  @override
+    int getRow() 
+    { 
+        return row; 
+    } 
+  
+    int getColumn() 
+    { 
+        return column; 
+    } 
+    Color cellColor(bool isFilled)
+    {
+      Color shadeOfSqure;
+      if(isFilled)
+      {
+        shadeOfSqure =  const Color(0xDD000000);//.fromRGBO(255, 255, 255, 0.5)
+      }
+      else
+      {
+        shadeOfSqure = const Color(0xFFFFFFFF);//(0, 0, 0, 1.0)
+      }
+      return shadeOfSqure;
+  }   
+
   Widget build(BuildContext context) 
   {
     return Container
