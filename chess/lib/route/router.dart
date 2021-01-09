@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chess/route/names.dart';
 import 'package:chess/views/about/about.dart';
 import 'package:chess/views/content/content.dart';
-import 'package:chess/views/home/home.dart';
+import 'package:chess/views/chess/chess.dart';
 
 
 
@@ -13,13 +13,13 @@ Route<dynamic> generateRoute(RouteSettings settings)
   switch (settings.name) 
   {
     case HomeRoute:
-      return _getPageRoute(HomeView());
+      return _getPageRoute(ChessView());
     case ContentRoute:
       return _getPageRoute(ContentView());
     case AboutRoute:
       return _getPageRoute(AboutView());
     default:
-      return _getPageRoute(HomeView());
+      return _getPageRoute(ChessView());
   }
 }
 

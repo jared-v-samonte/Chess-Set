@@ -1,11 +1,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:chess/action/action_button.dart';
-import 'package:chess/views/home/home.dart';
+import 'package:chess/views/chess/chess.dart';
 
-class HomeMobile extends StatelessWidget 
+class ChessMobile extends StatelessWidget 
 {
-  const HomeMobile({Key key}) : super(key: key);
+  const ChessMobile({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) 
@@ -16,7 +16,7 @@ class HomeMobile extends StatelessWidget
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>
       [
-        HomeView(),
+        const ChessView(),
         const ActionButton('Join Course'),
       ],
     );

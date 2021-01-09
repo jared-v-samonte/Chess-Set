@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'Piece.dart';
 
 class Cell extends StatelessWidget {
-  const Cell(this.row, this.column, this.isFilled, this.piece);
+  Cell(this.row, this.column, this.isFilled, this.piece);
   final int row;
   final int column;
   final bool isFilled;
-  final Piece piece;
+  Piece piece;
 
   int getRow() {
     return row;
@@ -20,6 +20,11 @@ class Cell extends StatelessWidget {
   Piece getPiece() 
   {
     return piece;
+  }
+
+  void setPiece(Piece piece)
+  {
+    this.piece = piece;
   }
 
   Color cellColor(bool isFilled) {
@@ -35,11 +40,23 @@ class Cell extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container
     (
-      decoration: BoxDecoration
+      child: Row
       (
-          color: const Color(0xDD000000),
-          border: Border.all(color: cellColor(isFilled), width: 8)
-      )
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,        children:
+        [
+          ConstrainedBox
+          (
+            constraints: const BoxConstraints(maxWidth: 15.0, maxHeight: 15.0, minWidth: 15.0, minHeight: 15.0),
+            child: getPiece()
+          ),
+        ]
+      ),
+      decoration: BoxDecoration
+          (
+              color: const Color(0xDD000000),
+              border: Border.all(color: cellColor(isFilled), width: 8)
+          )
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chess/widgets/navigation_drawer/drawer_header.dart';
 import 'package:chess/widgets/center/center_view.dart';
 import 'package:chess/widgets/navigation_bar/bar.dart';
-import 'package:chess/views/home/home.dart';
+import 'package:chess/views/chess/chess.dart';
 import 'package:chess/action/action_button.dart';
 import 'package:responsive_builder/responsive_builder.dart';
 
@@ -33,7 +33,7 @@ class MainView extends StatelessWidget
               (
                 width: 60,
               ),
-              const HomeView(),
+              const ChessView(),
               const Expanded
               (
                 child: ActionButton('press me')

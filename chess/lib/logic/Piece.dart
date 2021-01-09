@@ -28,20 +28,32 @@ abstract class Piece extends StatelessWidget {
   bool canMove(Board board, Cell start, Cell end) {}
 
   @override
-  Widget build(BuildContext context) {
-    return Container(
-        decoration: BoxDecoration(
-            image: DecorationImage(
-              image: whatShade(shade),
-              fit: BoxFit.cover,
-            ),
-            border: Border.all(color: Colors.black, width: 8)),
-        child: Row(
+  Widget build(BuildContext context) 
+  {
+    return Container
+    (
+        decoration: BoxDecoration
+        (
+          image: DecorationImage
+          (
+            image: whatShade(shade),
+            fit: BoxFit.cover,
+          ),
+          border: Border.all(color: Colors.black, width: 8)
+        ),
+        child: ConstrainedBox
+          (
+            constraints: const BoxConstraints(maxWidth: 15.0, maxHeight: 15.0),
+          ),
+        /*child: Row
+        (
           children: <Widget>[
-            IconButton(
+            Button
+            (
               icon: const Icon(Icons.menu),
               onPressed: () {},
             ),
           ],
-        ));
+        )*/
+    );
   }}

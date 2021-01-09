@@ -107,13 +107,13 @@ Cell chessBoard(int row, int column) {
     ],
     //row 8
     [
-      Cell(0, 1, filled, Knight(clear)),
-      Cell(0, 2, blank, Bishop(clear)),
-      Cell(0, 3, filled, Queen(clear)),
-      Cell(0, 4, blank, King(clear)),
-      Cell(0, 5, filled, Bishop(clear)),
-      Cell(0, 7, blank, Knight(clear)),
-      Cell(0, 0, filled, Rook(clear)),
+      Cell(7, 1, filled, Knight(clear)),
+      Cell(7, 2, blank, Bishop(clear)),
+      Cell(7, 3, filled, Queen(clear)),
+      Cell(7, 4, blank, King(clear)),
+      Cell(7, 5, filled, Bishop(clear)),
+      Cell(7, 7, blank, Knight(clear)),
+      Cell(7, 0, filled, Rook(clear)),
     ],
   ];
   return gridState[row][column];
@@ -132,44 +132,34 @@ Cell chessBoard(int row, int column) {
     growable: false);
   */
 }
-
-class Pawn {
-}
-
-class Board {
+class Board extends StatelessWidget
+{
   const Board();
-  final int gridStateLength = 8;
-
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.black,
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey[900],
-          title: const Center(
-            child: Text(
-              'Flutter GridView Demo',
-              style: TextStyle(
-                color: Colors.blueAccent,
-                fontWeight: FontWeight.bold,
-                fontSize: 30.0,
-              ),
+  Widget build(BuildContext context) 
+  {
+    return Container
+    (
+      child: ConstrainedBox
+        (
+          constraints: const BoxConstraints(maxWidth: 1000.0, maxHeight: 1000.0),
+          child: GridView.count
+          (
+            crossAxisCount: 64,
+            crossAxisSpacing: 10.0,
+            mainAxisSpacing: 10.0,
+            shrinkWrap: true,
+            children: List.generate
+            (8, (int i) 
+              {
+                for (var j = 0; j < 8; j++) 
+                {
+                  return chessBoard(i, j);
+                }
+              }
             ),
           ),
         ),
-        body: GridView.count(
-          crossAxisCount: 8,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
-          shrinkWrap: true,
-          children: List.generate(64, (int i) {
-            for (var j = 0; j < 8; j++) {
-              return chessBoard(i, j);
-            }
-          }),
-        ),
-      ),
     );
   }
 }
