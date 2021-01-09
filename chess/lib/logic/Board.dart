@@ -1,44 +1,49 @@
-import 'package:chess/logic/Cell.dart';
 import 'package:flutter/material.dart';
+import 'Bishop.dart';
 import 'Cell.dart';
+import 'King.dart';
+import 'Knight.dart';
+import 'Pawn.dart';
+import 'Queen.dart';
+import 'Rooks.dart';
 
 List getBox(int x, int y) {
-  List locations = List<dynamic>.generate(2, (i) => [0, 0], growable: false);
+  final List locations = List<dynamic>.generate(2, (i) => [0, 0], growable: false);
   if (x < 0 || x > 7 || y < 0 || y > 7) {
-    throw new Exception("Index out of bound");
+    throw Exception("Index out of bound");
   }
 
   return locations[x][y];
 }
 
-List<List<Cell>> resetBoard() 
-{
+Cell chessBoard(int row, int column) {
   const bool blank = false;
   const bool filled = true;
-  final List<List<Cell>> gridState = 
-  [
+  const String shaded = 'blue';
+  const String clear = 'pink';
+  List<List<Cell>> gridState = [
     //row 1
     [
-      Cell(0, 0, blank, Rook(true)),
-      Cell(0, 1, filled, Knight(true)),
-      Cell(0, 2, blank, Bishop(true)),
-      Cell(0, 3, filled, Queen(true)),
-      Cell(0, 4, blank, King(true)),
-      Cell(0, 5, filled, Bishop(true)),
-      Cell(0, 7, blank, Knight(true)),
-      Cell(0, 0, filled, Rook(true)),
+      Cell(0, 0, blank, Rook(shaded)),
+      Cell(0, 1, filled, Knight(shaded)),
+      Cell(0, 2, blank, Bishop(shaded)),
+      Cell(0, 3, filled, Queen(shaded)),
+      Cell(0, 4, blank, King(shaded)),
+      Cell(0, 5, filled, Bishop(shaded)),
+      Cell(0, 7, blank, Knight(shaded)),
+      Cell(0, 0, filled, Rook(shaded)),
     ],
     //row 2
     [
-      Cell(1, 0, filled, Pawn(true)),
-      Cell(1, 1, blank, Pawn(true)),
-      Cell(1, 2, filled, Pawn(true)),
-      Cell(1, 3, blank, Pawn(true)),
-      Cell(1, 4, filled, Pawn(true)),
-      Cell(1, 5, blank, Pawn(true)),
-      Cell(1, 6, filled, Pawn(true)),
-      Cell(1, 7, blank, Pawn(true)),
-      Cell(1, 8, filled, Pawn(true)),
+      Cell(1, 0, filled, Pawn(shaded)),
+      Cell(1, 1, blank, Pawn(shaded)),
+      Cell(1, 2, filled, Pawn(shaded)),
+      Cell(1, 3, blank, Pawn(shaded)),
+      Cell(1, 4, filled, Pawn(shaded)),
+      Cell(1, 5, blank, Pawn(shaded)),
+      Cell(1, 6, filled, Pawn(shaded)),
+      Cell(1, 7, blank, Pawn(shaded)),
+      Cell(1, 8, filled, Pawn(shaded)),
     ],
     //row 3
     [
@@ -90,75 +95,81 @@ List<List<Cell>> resetBoard()
     ],
     //row 7
     [
-      Cell(6, 0, blank, Pawn(true)),
-      Cell(6, 1, filled, Pawn(true)),
-      Cell(6, 2, blank, Pawn(true)),
-      Cell(6, 3, filled, Pawn(true)),
-      Cell(6, 4, blank, Pawn(true)),
-      Cell(6, 5, filled, Pawn(true)),
-      Cell(6, 6, blank, Pawn(true)),
-      Cell(6, 7, filled, Pawn(true)),
-      Cell(6, 8, blank, Pawn(true)),
+      Cell(6, 0, blank, Pawn(clear)),
+      Cell(6, 1, filled, Pawn(clear)),
+      Cell(6, 2, blank, Pawn(clear)),
+      Cell(6, 3, filled, Pawn(clear)),
+      Cell(6, 4, blank, Pawn(clear)),
+      Cell(6, 5, filled, Pawn(clear)),
+      Cell(6, 6, blank, Pawn(clear)),
+      Cell(6, 7, filled, Pawn(clear)),
+      Cell(6, 8, blank, Pawn(clear)),
     ],
     //row 8
     [
-      Cell(0, 1, filled, Knight(true)),
-      Cell(0, 2, blank, Bishop(true)),
-      Cell(0, 3, filled, Queen(true)),
-      Cell(0, 4, blank, King(true)),
-      Cell(0, 5, filled, Bishop(true)),
-      Cell(0, 7, blank, Knight(true)),
-      Cell(0, 0, filled, Rook(true)),
+      Cell(0, 1, filled, Knight(clear)),
+      Cell(0, 2, blank, Bishop(clear)),
+      Cell(0, 3, filled, Queen(clear)),
+      Cell(0, 4, blank, King(clear)),
+      Cell(0, 5, filled, Bishop(clear)),
+      Cell(0, 7, blank, Knight(clear)),
+      Cell(0, 0, filled, Rook(clear)),
     ],
   ];
-  return gridState;
+  return gridState[row][column];
+  /*
+    final List<List<Cell>> ChessSet = List.generate(8, (int i) => 
+    [
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+      Cell(0, 0, null, null),
+    ],
+    growable: false);
+  */
 }
 
-Widget _buildGridItem(List<List<Cell>> chessBoard) 
-{
-  switch (chessBoard[][y]) {
-
+class Pawn {
 }
 
-Widget _buildGridItems(BuildContext context, int index) {
-  List<List<Cell>> gridState = resetBoard();
-  int gridStateLength = gridState.length;
-  int x, y = 0;
-  x = (index / gridStateLength).floor();
-  y = (index % gridStateLength);
-  return GestureDetector(
-    onTap: () => _gridItemTapped(x, y),
-    child: GridTile(
-      child: Container(
-        decoration:
-            BoxDecoration(border: Border.all(color: Colors.black, width: 0.5)),
-        child: Center(
-          child: _buildGridItem(gridState),
-        ),
-      ),
-    ),
-  );
-}
-
-class Board 
-{
+class Board {
   const Board();
   final int gridStateLength = 8;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      margin: const EdgeInsets.all(8.0),
-      decoration:
-          BoxDecoration(border: Border.all(color: Colors.black, width: 2.0)),
-      child: GridView.builder(
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: gridStateLength,
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.blueGrey[900],
+          title: const Center(
+            child: Text(
+              'Flutter GridView Demo',
+              style: TextStyle(
+                color: Colors.blueAccent,
+                fontWeight: FontWeight.bold,
+                fontSize: 30.0,
+              ),
+            ),
+          ),
         ),
-        itemBuilder: resetBoard(),
-        itemCount: gridStateLength * gridStateLength,
+        body: GridView.count(
+          crossAxisCount: 8,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+          shrinkWrap: true,
+          children: List.generate(64, (int i) {
+            for (var j = 0; j < 8; j++) {
+              return chessBoard(i, j);
+            }
+          }),
+        ),
       ),
-    ); //final locations = List<Cell>.generate(8, (i) => 8, growable: false);
+    );
   }
 }

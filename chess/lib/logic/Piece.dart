@@ -1,40 +1,47 @@
 import 'package:flutter/material.dart';
-import 'package:chess/logic/Cell.dart';
-import 'package:chess/logic/Board.dart';
+import 'Board.dart';
+import 'Cell.dart';
 
+abstract class Piece extends StatelessWidget {
+  bool killed = false;
+  String shade = 'gray';
+  AssetImage picture;
 
-abstract class Piece 
-{ 
-	bool killed = false; 
-	bool white = false; 
+  Piece(String shade) {
+    setShade(shade);
+  }
 
-	Piece(bool white) 
-	{ 
-		setWhite(white); 
-	} 
+  void setShade(String shade) {
+    this.shade = shade;
+  }
 
-	bool isWhite() 
-	{ 
-		return this.white; 
-	} 
+  bool isKilled() {
+    return killed;
+  }
 
-	void setWhite(bool white) 
-	{ 
-		this.white = white; 
-	} 
+  void setKilled(bool killed) {
+    this.killed = killed;
+  }
 
-	bool isKilled() 
-	{ 
-		return this.killed; 
-	} 
+  AssetImage whatShade(String shade) {}
 
-	void setKilled(bool killed) 
-	{ 
-		this.killed = killed; 
-	} 
+  bool canMove(Board board, Cell start, Cell end) {}
 
-  bool canMove(Board board,Cell start,Cell end)
-  {
-
-  } 
-} 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+              image: whatShade(shade),
+              fit: BoxFit.cover,
+            ),
+            border: Border.all(color: Colors.black, width: 8)),
+        child: Row(
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {},
+            ),
+          ],
+        ));
+  }}
