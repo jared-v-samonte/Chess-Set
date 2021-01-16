@@ -1,43 +1,39 @@
 import 'package:flutter/material.dart';
 import 'Board.dart';
-import 'Cell.dart';
 import 'Piece.dart';
+import 'PieceData.dart';
 
-class Rook extends Piece 
-{
-	Rook(String shade) : super(shade);
-
-   @override
-  AssetImage whatShade(String shade) 
-  {
+class Rook extends PieceData {
+  Rook(String shade) {
+    super.shade = shade;
+    whatShade(shade);
+  }
+  @override
+  void whatShade(String shade) {
     AssetImage shadeOfSqure;
-    if (shade == 'blue') 
-    {
-      shadeOfSqure = const AssetImage('assests/Chess_Pieces/Blue_Rooks'); //.fromRGBO(255, 255, 255, 0.5)
-    } 
-    else 
-    {
-      shadeOfSqure= const AssetImage('assests/Chess_Pieces/Pink_Rooks');  //(0, 0, 0, 1.0)
+    if (shade == 'blue') {
+      shadeOfSqure = const AssetImage(
+          'Chess_Pieces/Blue_Rook.jpeg'); //.fromRGBO(255, 255, 255, 0.5)
+    } else {
+      shadeOfSqure =
+          const AssetImage('Chess_Pieces/Pink_Rook.jpeg'); //(0, 0, 0, 1.0)
     }
-    return shadeOfSqure;
+    super.picture = shadeOfSqure;
   }
 
-
-	@override
-  bool canMove(Board board, Cell start, Cell end) 
-  {
+  @override
+  bool canMove(Piece start, Piece end) {
     int row;
     int column;
-		// we can't move the piece to a spot that has 
-		// a piece of the same colour 
-		if (end.getPiece().whatShade(shade) == whatShade(shade)) 
-    {
+    // we can't move the piece to a spot that has
+    // a piece of the same colour
+    if (start.data.shade == end.data.shade) {
       return false;
     }
     row = start.getRow() - end.getRow();
     row = row.abs();
     column = start.getRow() - end.getRow();
     column = column.abs();
-		return row * column == 2; 
-	} 
-} 
+    return row * column == 2;
+  }
+}

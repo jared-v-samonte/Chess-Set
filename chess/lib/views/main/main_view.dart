@@ -1,3 +1,6 @@
+import 'package:chess/logic/Cell.dart';
+import 'package:chess/logic/Piece.dart';
+import 'package:chess/logic/Rooks.dart';
 import 'package:flutter/material.dart';
 import 'package:chess/widgets/navigation_drawer/drawer_header.dart';
 import 'package:chess/widgets/center/center_view.dart';
@@ -15,29 +18,21 @@ class MainView extends StatelessWidget
   @override
   Widget build(BuildContext context) 
   {
+    const double length = 600;
     return ResponsiveBuilder(
       builder: (context, sizingInformation) => Scaffold
       (
         drawer: sizingInformation.deviceScreenType == DeviceScreenType.Mobile
             ?  const HeaderDrawer()
             : null,
-        backgroundColor: Colors.purple[800],
+        backgroundColor: Color(0xFF202020),
         body: CenterBox
         (
           child: Column
           (
             children: <Widget>
             [
-              const Bar(),
-              const SizedBox
-              (
-                width: 60,
-              ),
               const ChessView(),
-              const Expanded
-              (
-                child: ActionButton('press me')
-              ) 
             ]
           )
         )

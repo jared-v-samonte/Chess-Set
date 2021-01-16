@@ -1,43 +1,38 @@
+import 'package:chess/logic/Piece.dart';
+import 'package:chess/logic/PieceData.dart';
 import 'package:flutter/material.dart';
-import 'Board.dart';
-import 'Cell.dart';
-import 'Piece.dart';
 
-class Bishop extends Piece 
-{
-	Bishop(String shade) : super(shade);
-
-  @override
-  AssetImage whatShade(String shade) 
-  {
-    AssetImage shadeOfSqure;
-    if (shade == 'blue') 
-    {
-      shadeOfSqure = const AssetImage('assests/Chess_Pieces/Blue_Bishop'); //.fromRGBO(255, 255, 255, 0.5)
-    } 
-    else 
-    {
-      shadeOfSqure= const AssetImage('assests/Chess_Pieces/Pink_Bishop');  //(0, 0, 0, 1.0)
-    }
-    return shadeOfSqure;
+class Bishop extends PieceData {
+  Bishop(String shade) {
+    whatShade(shade);
   }
 
+  @override
+  void whatShade(String shade) {
+    AssetImage shadeOfSqure;
+    if (shade == 'blue') {
+      shadeOfSqure = const AssetImage(
+          'Chess_Pieces/Blue_Bishop.jpeg'); //.fromRGBO(255, 255, 255, 0.5)
+    } else {
+      shadeOfSqure =
+          const AssetImage('Chess_Pieces/Pink_Bishop.jpeg'); //(0, 0, 0, 1.0)
+    }
+    super.picture = shadeOfSqure;
+  }
 
-	@override
-  bool canMove(Board board, Cell start, Cell end) 
-  {
+  @override
+  bool canMove(Piece start, Piece end) {
     int row;
     int column;
-		// we can't move the piece to a spot that has 
-		// a piece of the same colour 
-		if (end.getPiece().whatShade(shade) == whatShade(shade)) 
-    {
+    // we can't move the piece to a spot that has
+    // a piece of the same colour
+    if (start.data.shade == end.data.shade) {
       return false;
     }
     row = start.getRow() - end.getRow();
     row = row.abs();
     column = start.getRow() - end.getRow();
     column = column.abs();
-		return row * column == 2; 
-	} 
-} 
+    return row * column == 2;
+  }
+}

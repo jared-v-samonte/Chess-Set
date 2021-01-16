@@ -1,62 +1,63 @@
+import 'package:chess/logic/EmptyCell.dart';
+import 'package:chess/logic/Piece.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'Piece.dart';
 
-class Cell extends StatelessWidget {
-  Cell(this.row, this.column, this.isFilled, this.piece);
-  final int row;
-  final int column;
+class Cell extends StatefulWidget {
+  Cell(this.isFilled, this.piece);
   final bool isFilled;
   Piece piece;
 
-  int getRow() {
-    return row;
-  }
-
-  int getColumn() {
-    return column;
-  }
-
-  Piece getPiece() 
-  {
-    return piece;
-  }
-
-  void setPiece(Piece piece)
-  {
-    this.piece = piece;
-  }
-
-  Color cellColor(bool isFilled) {
+  Border getBorder() {
     Color shadeOfSqure;
     if (isFilled) {
-      shadeOfSqure = const Color(0xDD000000); //.fromRGBO(255, 255, 255, 0.5)
+      shadeOfSqure = const Color(0xDD7F00FF); //.fromRGBO(255, 255, 255, 0.5)
     } else {
-      shadeOfSqure = const Color(0xFFFFFFFF); //(0, 0, 0, 1.0)
+      shadeOfSqure = const Color(0xFFFF3333); //(0, 0, 0, 1.0)
     }
-    return shadeOfSqure;
+    return Border.all(color: shadeOfSqure, width: 4);
   }
 
+  @override
+  _CellState createState() => _CellState();
+}
+
+class _CellState extends State<Cell> {
+  @override
   Widget build(BuildContext context) {
-    return Container
-    (
-      child: Row
-      (
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,        children:
-        [
-          ConstrainedBox
-          (
-            constraints: const BoxConstraints(maxWidth: 15.0, maxHeight: 15.0, minWidth: 15.0, minHeight: 15.0),
-            child: getPiece()
-          ),
-        ]
-      ),
-      decoration: BoxDecoration
-          (
-              color: const Color(0xDD000000),
-              border: Border.all(color: cellColor(isFilled), width: 8)
-          )
+    DragTarget<Piece>(
+      builder: (BuildContext context, List<Piece> incoming, List rejected) {
+        if (widget.piece != null) {
+          print('Dropped');
+          return Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(color: Color(0xDDFFFFFF)),
+              child: Piece(widget.piece.row, widget.piece.column,
+                  widget.isFilled, widget.piece.data));
+        } else {
+          print('Failed');
+          return Container(
+              width: 100,
+              height: 100,
+              decoration: BoxDecoration(color: Color(0xDDFFFFFF)),
+              child: EmptyCell(widget.piece.isFilled));
+        }
+      },
+      onWillAccept: (Piece data) =>
+          widget.piece.data.canMove(data, widget.piece),
+      onAccept: (Piece data) {
+        setState(() {
+          return Piece(widget.piece.row, widget.piece.column,
+              widget.piece.isFilled, widget.piece.data);
+        });
+      },
+      onLeave: (Object data) {
+        setState(() {
+          return EmptyCell(widget.isFilled);
+        });
+      },
     );
+    return Container();
   }
 }

@@ -53,6 +53,21 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/profile_pic.jpg
+    - assets/Chess_Pieces/Blue_Bishop.jpeg
+    - assets/Chess_Pieces/Blue_King.jpeg
+    - assets/Chess_Pieces/Blue_Knight.jpeg
+    - assets/Chess_Pieces/Blue_Pawn.jpeg
+    - assets/Chess_Pieces/Blue_Queen.jpeg
+    - assets/Chess_Pieces/Blue_Rook.jpeg
+    - assets/Chess_Pieces/Pink_Bishop.jpeg
+    - assets/Chess_Pieces/Pink_King.jpeg
+    - assets/Chess_Pieces/Pink_Knight.jpeg
+    - assets/Chess_Pieces/Pink_Pawn.jpeg
+    - assets/Chess_Pieces/Pink_Queen.jpeg
+    - assets/Chess_Pieces/Pink_Rook.jpeg
+    - assets/Chess_Pieces/blackbox.jpeg
+
+
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

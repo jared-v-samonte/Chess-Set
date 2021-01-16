@@ -1,59 +1,99 @@
+import 'package:chess/logic/PieceData.dart';
 import 'package:flutter/material.dart';
-import 'Board.dart';
-import 'Cell.dart';
+import 'package:flutter/cupertino.dart';
 
-abstract class Piece extends StatelessWidget {
-  bool killed = false;
-  String shade = 'gray';
-  AssetImage picture;
+class Piece extends StatefulWidget {
+  Piece(this.row, this.column, this.isFilled, this.data);
+  final int row;
+  final int column;
+  final bool isFilled;
+  PieceData data;
 
-  Piece(String shade) {
-    setShade(shade);
+  int getRow() {
+    return row;
   }
 
-  void setShade(String shade) {
-    this.shade = shade;
+  int getColumn() {
+    return column;
   }
 
-  bool isKilled() {
-    return killed;
+  PieceData getPiece() {
+    return data;
   }
 
-  void setKilled(bool killed) {
-    this.killed = killed;
+  BoxShape getShape(bool dragged) {
+    BoxShape shape;
+    if (dragged) {
+      shape = BoxShape.circle;
+    } else {
+      shape = BoxShape.rectangle;
+    }
+    return shape;
   }
 
-  AssetImage whatShade(String shade) {}
+  Border getBorder() {
+    Color shadeOfSqure;
+    if (isFilled) {
+      shadeOfSqure = const Color(0xDD7F00FF); //.fromRGBO(255, 255, 255, 0.5)
+    } else {
+      shadeOfSqure = const Color(0xFFFF3333); //(0, 0, 0, 1.0)
+    }
+    return Border.all(color: shadeOfSqure, width: 4);
+  }
 
-  bool canMove(Board board, Cell start, Cell end) {}
+  Border getFeedbackBorder() {
+    Color shadeOfPiece;
+    if (data.shade == 'blue') {
+      shadeOfPiece = const Color(0xDD00FFFF); //.fromRGBO(255, 255, 255, 0.5)
+    } else {
+      shadeOfPiece = const Color(0xFFFF66FF); //(0, 0, 0, 1.0)
+    }
+    return Border.all(color: shadeOfPiece, width: 4);
+  }
+
+  BoxDecoration getDecoration(bool dragged) {
+    const Color blankBackground = Color(0xDD000000);
+    BoxDecoration cellDecoration;
+    if (dragged == true) {
+      cellDecoration = BoxDecoration(
+          color: blankBackground,
+          border: getBorder(),
+          shape: getShape(dragged));
+    } else {
+      cellDecoration = BoxDecoration(
+          color: blankBackground,
+          border: getBorder(),
+          image: DecorationImage(image: data.picture),
+          shape: getShape(dragged));
+    }
+    return cellDecoration;
+  }
+
+  BoxDecoration getFeedback() {
+    const Color blankBackground = Color(0xDD000000);
+    return BoxDecoration(
+        color: blankBackground,
+        border: getFeedbackBorder(),
+        image: DecorationImage(image: data.picture),
+        shape: BoxShape.circle);
+  }
 
   @override
-  Widget build(BuildContext context) 
-  {
-    return Container
-    (
-        decoration: BoxDecoration
-        (
-          image: DecorationImage
-          (
-            image: whatShade(shade),
-            fit: BoxFit.cover,
-          ),
-          border: Border.all(color: Colors.black, width: 8)
+  _PieceState createState() => _PieceState();
+}
+
+class _PieceState extends State<Piece> {
+  @override
+  Widget build(BuildContext context) {
+    const bool dragged = true;
+    return Container(
+      child: Draggable(
+        feedback: Container(width: 70, height: 70, decoration: widget.getFeedback()),
+        child: Container(
+          decoration: widget.getDecoration(!dragged),
         ),
-        child: ConstrainedBox
-          (
-            constraints: const BoxConstraints(maxWidth: 15.0, maxHeight: 15.0),
-          ),
-        /*child: Row
-        (
-          children: <Widget>[
-            Button
-            (
-              icon: const Icon(Icons.menu),
-              onPressed: () {},
-            ),
-          ],
-        )*/
+        childWhenDragging: Container(decoration: widget.getDecoration(dragged)),
+      ),
     );
-  }}
+  }
+}
