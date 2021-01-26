@@ -1,7 +1,6 @@
+import 'package:chess/logic/Piece.dart';
+import 'package:chess/logic/PieceData.dart';
 import 'package:flutter/material.dart';
-import 'Board.dart';
-import 'Piece.dart';
-import 'PieceData.dart';
 
 class Knight extends PieceData {
   Knight(String shade) {
@@ -14,27 +13,21 @@ class Knight extends PieceData {
     AssetImage shadeOfSqure;
     if (shade == 'blue') {
       shadeOfSqure = const AssetImage(
-          'Chess_Pieces/Blue_Knight.jpeg'); //.fromRGBO(255, 255, 255, 0.5)
+          'Chess_Pieces/Blue_Knight.jpeg'); 
     } else {
       shadeOfSqure =
-          const AssetImage('Chess_Pieces/Pink_Knight.jpeg'); //(0, 0, 0, 1.0)
+          const AssetImage('Chess_Pieces/Pink_Knight.jpeg');
     }
     super.picture = shadeOfSqure;
   }
 
-  @override
+@override
   bool canMove(Piece start, Piece end) {
-    int row;
-    int column;
-    // we can't move the piece to a spot that has
-    // a piece of the same colour
-    if (start.data.shade == end.data.shade) {
-      return false;
+    bool makeMove;
+    makeMove = false;
+    if (end == null) {
+      makeMove = true;
     }
-    row = start.getRow() - end.getRow();
-    row = row.abs();
-    column = start.getRow() - end.getRow();
-    column = column.abs();
-    return row * column == 2;
+    return makeMove;
   }
 }

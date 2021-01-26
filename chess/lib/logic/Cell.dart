@@ -11,9 +11,9 @@ class Cell extends StatefulWidget {
   Border getBorder() {
     Color shadeOfSqure;
     if (isFilled) {
-      shadeOfSqure = const Color(0xDD7F00FF); //.fromRGBO(255, 255, 255, 0.5)
+      shadeOfSqure = const Color(0xDD7F00FF); 
     } else {
-      shadeOfSqure = const Color(0xFFFF3333); //(0, 0, 0, 1.0)
+      shadeOfSqure = const Color(0xFFFF3333);
     }
     return Border.all(color: shadeOfSqure, width: 4);
   }
@@ -40,8 +40,8 @@ class _CellState extends State<Cell> {
           return Container(
               width: 100,
               height: 100,
-              decoration: BoxDecoration(color: Color(0xDDFFFFFF)),
-              child: EmptyCell(widget.piece.isFilled));
+              decoration: BoxDecoration(color: Color(0xDDFFFFFF), shape: BoxShape.rectangle),
+              child: EmptyCell(widget.piece.isFilled, widget.piece));
         }
       },
       onWillAccept: (Piece data) =>
@@ -54,7 +54,7 @@ class _CellState extends State<Cell> {
       },
       onLeave: (Object data) {
         setState(() {
-          return EmptyCell(widget.isFilled);
+          return EmptyCell(widget.piece.isFilled, widget.piece);
         });
       },
     );

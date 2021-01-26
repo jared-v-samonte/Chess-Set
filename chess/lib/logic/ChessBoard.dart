@@ -1,6 +1,5 @@
 import 'package:chess/logic/Bishop.dart';
 import 'package:chess/logic/Cell.dart';
-import 'package:chess/logic/EmptyCell.dart';
 import 'package:chess/logic/Piece.dart';
 import 'package:chess/logic/King.dart';
 import 'package:chess/logic/Knight.dart';

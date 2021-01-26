@@ -15,10 +15,10 @@ class King extends PieceData {
     AssetImage shadeOfSqure;
     if (shade == 'blue') {
       shadeOfSqure = const AssetImage(
-          'Chess_Pieces/Blue_King.jpeg'); //.fromRGBO(255, 255, 255, 0.5)
+          'Chess_Pieces/Blue_King.jpeg'); 
     } else {
       shadeOfSqure =
-          const AssetImage('Chess_Pieces/Pink_King.jpeg'); //(0, 0, 0, 1.0)
+          const AssetImage('Chess_Pieces/Pink_King.jpeg');
     }
     super.picture = shadeOfSqure;
     return shadeOfSqure;
@@ -34,25 +34,12 @@ class King extends PieceData {
 
   @override
   bool canMove(Piece start, Piece end) {
-    int row;
-    int column;
-    // we can't move the piece to a Piece that
-    // has a piece of the same color
-    if (start.data.shade == end.data.shade) {
-      return false;
+    bool makeMove;
+    makeMove = false;
+    if (end == null) {
+      makeMove = true;
     }
-
-    row = start.row - end.row;
-    row = row.abs();
-    column = start.getRow() - end.getRow();
-    column = column.abs();
-    if (row + column == 1) {
-      // check if this move will not result in the king
-      // being attacked if so return true
-      return true;
-    }
-
-    return isValidCastling(start, end);
+    return makeMove;
   }
 
   bool isValidCastling(Piece start, Piece end) {

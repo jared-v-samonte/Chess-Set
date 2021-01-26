@@ -34,9 +34,9 @@ class Piece extends StatefulWidget {
   Border getBorder() {
     Color shadeOfSqure;
     if (isFilled) {
-      shadeOfSqure = const Color(0xDD7F00FF); //.fromRGBO(255, 255, 255, 0.5)
+      shadeOfSqure = const Color(0xDD7F00FF); 
     } else {
-      shadeOfSqure = const Color(0xFFFF3333); //(0, 0, 0, 1.0)
+      shadeOfSqure = const Color(0xFFFF3333);
     }
     return Border.all(color: shadeOfSqure, width: 4);
   }
@@ -44,9 +44,9 @@ class Piece extends StatefulWidget {
   Border getFeedbackBorder() {
     Color shadeOfPiece;
     if (data.shade == 'blue') {
-      shadeOfPiece = const Color(0xDD00FFFF); //.fromRGBO(255, 255, 255, 0.5)
+      shadeOfPiece = const Color(0xDD00FFFF); 
     } else {
-      shadeOfPiece = const Color(0xFFFF66FF); //(0, 0, 0, 1.0)
+      shadeOfPiece = const Color(0xFFFF66FF);
     }
     return Border.all(color: shadeOfPiece, width: 4);
   }
@@ -88,11 +88,12 @@ class _PieceState extends State<Piece> {
     const bool dragged = true;
     return Container(
       child: Draggable(
-        feedback: Container(width: 70, height: 70, decoration: widget.getFeedback()),
+        feedback: Container(width: 60, height: 60, decoration: widget.getFeedback()),
         child: Container(
           decoration: widget.getDecoration(!dragged),
         ),
         childWhenDragging: Container(decoration: widget.getDecoration(dragged)),
+        
       ),
     );
   }

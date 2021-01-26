@@ -52,47 +52,47 @@ class Board extends StatelessWidget {
       ],
       //row 3
       [
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled)
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null))
       ],
       //row 4
       [
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank)
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null))
       ],
       //row 5
       [
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled)
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null))
       ],
       //row 6
       [
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank),
-        EmptyCell(filled),
-        EmptyCell(blank)
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null)),
+        Container(child:EmptyCell(filled, null)),
+        Container(child:EmptyCell(blank, null))
       ],
       //row 7
       [
